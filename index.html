@@ -9,6 +9,12 @@
         /* Mengimpor font dari Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&family=Londrina+Solid:wght@400;900&family=Poppins:wght@300;400;500;600;700&display=swap');
 
+        /* Smooth scrolling behavior untuk navigasi */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px; /* Offset agar bagian yang dituju tidak tertutup navbar */
+        }
+
         /* Mendeklarasikan class khusus untuk font */
         .font-solid { font-family: 'Londrina Solid', cursive; }
         .font-outline { font-family: 'Londrina Outline', cursive; }
@@ -73,20 +79,36 @@
         }
     </script>
 </head>
-<body class="bg-cream font-poppins text-darkblue min-h-screen">
+<body class="bg-cream font-poppins text-darkblue min-h-screen selection:bg-darkblue selection:text-cream">
+
+    <!-- Sticky Navbar (Sesuai Referensi Gambar) -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] md:w-max bg-cream/85 backdrop-blur-md border border-darkblue/10 shadow-sm rounded-full px-5 md:px-8 py-3 flex justify-between items-center transition-all duration-300">
+        <!-- Logo -->
+        <a href="#" class="font-solid text-[2rem] text-darkblue tracking-wide leading-none mt-1">ICA.</a>
+        
+        <!-- Menu Tengah (Desktop Only) -->
+        <div class="hidden md:flex items-center gap-8 mx-12 font-poppins font-medium text-darkblue text-[0.95rem]">
+            <a href="#about" class="hover:text-darkblue/60 transition-colors">About</a>
+            <a href="#experience" class="hover:text-darkblue/60 transition-colors">Experience</a>
+            <a href="#portfolio" class="hover:text-darkblue/60 transition-colors">Portfolio</a>
+        </div>
+        
+        <!-- CTA Button -->
+        <a href="#contact" class="bg-darkblue text-cream px-6 py-2.5 sm:px-7 rounded-full font-poppins font-bold text-sm hover:scale-105 hover:bg-[#3d6480] transition-all shadow-md whitespace-nowrap">Let's Talk</a>
+    </nav>
 
     <!-- Wrapper Utama -->
     <main class="w-full relative overflow-hidden">
         
-        <!-- Bagian Header (Nama) -->
-        <header class="pt-16 md:pt-24 px-6 text-center reveal active max-w-4xl mx-auto">
-            <h1 class="flex flex-col items-center justify-center text-[4.5rem] sm:text-[6.5rem] md:text-[8rem] leading-[0.85] tracking-wide text-darkblue">
-                <div class="flex items-center gap-x-3 sm:gap-x-4">
+        <!-- Bagian Hero (Dibuat Selayar Penuh / min-h-screen) -->
+        <header class="min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center px-6 text-center max-w-7xl mx-auto reveal active relative">
+            <h1 class="flex flex-col items-center justify-center text-[4.5rem] sm:text-[7.5rem] md:text-[9rem] lg:text-[11rem] leading-[0.85] tracking-wide text-darkblue">
+                <div class="flex items-center gap-x-3 sm:gap-x-4 lg:gap-x-6">
                     <span class="font-solid">ICA</span>
                     <span class="font-outline">MAE</span>
                     <span class="font-solid">LANI</span>
                 </div>
-                <div class="flex items-center gap-x-3 sm:gap-x-4 mt-2 sm:mt-4">
+                <div class="flex items-center gap-x-3 sm:gap-x-4 lg:gap-x-6 mt-3 sm:mt-4 lg:mt-6">
                     <span class="font-solid">PLA</span>
                     <span class="font-outline">MBO</span>
                     <span class="font-solid">YAN</span>
@@ -94,9 +116,9 @@
             </h1>
         </header>
 
-        <!-- Garis Pemisah Biru Tipis (Berisi Scrolling Tools) - Full Width -->
-        <div class="w-full bg-lightblue mt-16 md:mt-20 reveal overflow-hidden py-3 sm:py-3.5 border-y-2 border-darkblue/10 marquee-container cursor-default">
-            <div class="animate-scroll flex items-center gap-6 sm:gap-8 px-4 text-darkblue font-poppins font-bold text-xs sm:text-sm tracking-wider uppercase">
+        <!-- Garis Pemisah Biru Tipis (Berisi Scrolling Tools) -->
+        <div class="w-full bg-lightblue reveal overflow-hidden py-3 sm:py-4 border-y-2 border-darkblue/10 marquee-container cursor-default">
+            <div class="animate-scroll flex items-center gap-8 sm:gap-10 px-4 text-darkblue font-poppins font-bold text-sm sm:text-base tracking-wider uppercase">
                 <!-- Set 1 -->
                 <span>Figma</span> <span class="text-[10px]">✦</span>
                 <span>Canva</span> <span class="text-[10px]">✦</span>
@@ -119,10 +141,10 @@
         </div>
 
         <!-- Bagian Tentang Saya (Who Am I) -->
-        <section class="px-6 sm:px-12 py-12 md:py-20 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 reveal">
+        <section id="about" class="px-6 sm:px-12 pt-16 md:py-24 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20 reveal">
             <div class="flex-1 text-center md:text-left">
                 <!-- Judul Who Am I -->
-                <h2 class="text-[3.5rem] sm:text-[4.5rem] leading-none flex justify-center md:justify-start gap-x-2">
+                <h2 class="text-[3.5rem] sm:text-[5rem] lg:text-[6rem] leading-none flex justify-center md:justify-start gap-x-3">
                     <span class="font-solid">WHO</span>
                     <span class="font-outline">AM</span>
                     <span class="font-outline lowercase">i</span>
@@ -130,46 +152,117 @@
                 </h2>
                 
                 <!-- Subtitle -->
-                <p class="text-[0.65rem] sm:text-xs font-bold tracking-tight text-darkblue/80 mt-3">
+                <p class="text-xs lg:text-sm font-bold tracking-tight text-darkblue/80 mt-4 uppercase">
                     Junior UI Designer & Basic Prototyping | Selective Personal Muse
                 </p>
 
                 <!-- Deskripsi -->
-                <p class="text-xs sm:text-sm mt-5 leading-relaxed font-medium text-justify md:text-left">
-                    <span class="font-bold text-darkblue text-sm sm:text-base">ICA MAELANI,</span> Seorang <span class="italic font-bold">Junior UI Designer</span> dengan basic prototyping yang menciptakan antarmuka modern dan intuitif (mudah dipahami) untuk berbagai kebutuhan pengguna. 
+                <p class="text-sm lg:text-base mt-6 lg:mt-8 leading-relaxed font-medium text-justify md:text-left text-darkblue/90">
+                    <span class="font-bold text-darkblue text-base lg:text-lg">ICA MAELANI,</span> Seorang <span class="italic font-bold">Junior UI Designer</span> dengan basic prototyping yang menciptakan antarmuka modern dan intuitif (mudah dipahami) untuk berbagai kebutuhan pengguna. 
                     <br><br>
                     Juga seorang <span class="italic font-bold">Selective Personal Muse</span> Memiliki pengalaman Berkolaborasi dengan kreator atau fotografer tertentu melalui relasi profesional dan terpercaya.
                 </p>
             </div>
 
             <!-- Gambar Profil -->
-            <div class="w-48 h-64 sm:w-64 sm:h-80 md:w-72 md:h-96 shrink-0 relative rounded-2xl overflow-hidden shadow-lg border-4 border-cardbg mx-auto md:mx-0">
-                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Ica Maelani Profile" class="w-full h-full object-cover object-top">
+            <div class="w-56 h-72 sm:w-64 sm:h-80 md:w-80 md:h-[28rem] lg:w-[26rem] lg:h-[32rem] shrink-0 relative mx-auto md:mx-0 group">
+                <img src="IcaBlurBawah.png" alt="Ica Maelani Profile" class="transition-transform duration-700 group-hover:scale-105">
             </div>
         </section>
 
-        <!-- Bagian Portofolio (Background Full, Konten Terpusat) -->
-        <section class="bg-lightblue rounded-t-[40px] md:rounded-t-[60px] px-6 sm:px-12 pt-16 md:pt-20 pb-20 md:pb-24 mt-4 relative z-10 reveal">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="font-solid text-5xl sm:text-6xl text-cream text-center tracking-wide drop-shadow-sm">PORTOFOLIO</h2>
+        <!-- Bagian Pengalaman -->
+        <section id="experience" class="bg-cream px-6 sm:px-12 relative z-0 reveal">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-outline text-5xl sm:text-6xl lg:text-7xl text-darkblue text-center tracking-wide">PENGALAMAN</h2>
+                
+                <!-- Grid Layout Custom -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 mt-12 md:mt-16 lg:mt-20">
+                    
+                    <!-- CARD 1: ADMIN MEDIA SOSIAL -->
+                    <div class="md:col-span-3 bg-cardbg rounded-[32px] p-6 sm:p-10 relative shadow-sm hover-lift reveal delay-100 border border-[#e5e7eb]">
+                        <div class="flex justify-between items-start">
+                            <span class="bg-badgebg text-darkblue text-xs lg:text-sm font-bold px-4 lg:px-5 py-1.5 lg:py-2 rounded-full shadow-sm">2026</span>
+                            <a href="#" class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-darkblue flex justify-center items-center text-cream shadow-md hover:scale-110 transition-transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 lg:h-5 lg:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                </svg>
+                            </a>
+                        </div>
+                        <h3 class="font-solid text-[2rem] sm:text-[2.5rem] lg:text-[3rem] leading-none mt-6 lg:mt-8 text-darkblue uppercase">ADMIN MEDIA SOSIAL</h3>
+                        <p class="font-poppins font-semibold text-sm lg:text-base text-darkblue/80 mt-1 lg:mt-2">Antero Pictures</p>
+                        
+                        <ul class="mt-6 lg:mt-8 space-y-3 text-xs sm:text-sm lg:text-base text-darkblue/80 font-medium">
+                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[4px]">✦</span> <span class="leading-relaxed">Menyusun copywriting & publikasi konten di berbagai platform.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[4px]">✦</span> <span class="leading-relaxed">Membalas komentar, DM, dan pesan secara profesional.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[4px]">✦</span> <span class="leading-relaxed">Berkolaborasi dengan tim kreatif memastikan konten tepat waktu.</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- CARD 2: KASIR -->
+                    <div class="md:col-span-2 bg-darkblue rounded-[32px] p-6 sm:p-10 text-cream relative shadow-md hover-lift reveal delay-200">
+                        <span class="bg-white/20 text-cream text-xs lg:text-sm font-bold px-4 lg:px-5 py-1.5 lg:py-2 rounded-full shadow-sm backdrop-blur-sm">2025</span>
+                        <h3 class="font-solid text-[2rem] sm:text-[2.5rem] lg:text-[3rem] leading-none uppercase mt-6 lg:mt-8">KASIR</h3>
+                        <p class="font-poppins font-bold text-sm lg:text-base text-cream mt-1 lg:mt-2">(Finance Officer)</p>
+                        <p class="font-poppins font-medium text-xs lg:text-sm text-cream/80 mt-1">Cellular World</p>
+                        
+                        <div class="mt-8 flex flex-col gap-4 text-xs sm:text-[0.85rem] lg:text-sm text-cream/90 font-medium leading-relaxed">
+                            <p class="border-b border-cream/20 pb-4">Mengelola transaksi pelanggan.</p>
+                            <p class="border-b border-cream/20 pb-4">Membuat rekap transaksi keuangan.</p>
+                            <p>Memindai barang & menghitung diskon secara teliti.</p>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: RETAIL -->
+                    <div class="md:col-span-2 bg-cardbg rounded-[32px] p-6 sm:p-10 relative shadow-sm hover-lift reveal delay-100 border border-[#e5e7eb]">
+                        <span class="bg-badgebg text-darkblue text-xs lg:text-sm font-bold px-4 lg:px-5 py-1.5 lg:py-2 rounded-full shadow-sm">2024 - 2025</span>
+                        <h3 class="font-solid text-[2rem] sm:text-[2.5rem] lg:text-[3rem] leading-none mt-6 lg:mt-8 text-darkblue uppercase">RETAIL</h3>
+                        <p class="font-poppins font-semibold text-sm lg:text-base text-darkblue/80 mt-1 lg:mt-2">PT PLN Icon Plus</p>
+                        
+                        <p class="mt-6 text-[0.75rem] sm:text-xs lg:text-sm text-darkblue/80 leading-relaxed font-medium">
+                            Mencapai target menghubungi pelanggan (Telecollection), mengolah data, turun ke lapangan menawarkan produk, dan menganalisis kompetitor.
+                        </p>
+                    </div>
+
+                    <!-- CARD 4: SEKRETARIS & BENDAHARA -->
+                    <div class="md:col-span-3 bg-darkblue rounded-[32px] p-6 sm:p-10 text-cream relative shadow-md hover-lift overflow-hidden reveal delay-200">
+                        <!-- Watermark SITITI -->
+                        <div class="absolute right-[-10px] bottom-[-25px] font-solid text-[8rem] lg:text-[13rem] text-white/5 leading-none select-none z-0 pointer-events-none">SITITI</div>
+                        
+                        <div class="relative z-10">
+                            <span class="bg-white/20 text-cream text-xs lg:text-sm font-bold px-4 lg:px-5 py-1.5 lg:py-2 rounded-full shadow-sm backdrop-blur-sm">Organisasi</span>
+                            <h3 class="font-solid text-[1.8rem] sm:text-[2.2rem] lg:text-[2.8rem] leading-none mt-6 lg:mt-8 uppercase tracking-wide">SEKRETARIS & BENDAHARA</h3>
+                            <p class="font-poppins font-bold text-sm lg:text-base text-cream/90 mt-1 lg:mt-2 uppercase">SITITI</p>
+                            
+                            <p class="mt-6 text-xs sm:text-sm lg:text-base text-cream/80 leading-relaxed max-w-[95%] font-medium">
+                                Berhubungan langsung dengan pihak sponsor, menangani proposal, surat sponsor, dan laporan kegiatan untuk dua event utama. Mengelola arus keuangan acara secara efisien.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Portofolio -->
+        <section id="portfolio" class="bg-lightblue rounded-t-[40px] md:rounded-t-[60px] lg:rounded-t-[80px] px-6 sm:px-12 pt-10 md:pt-10 pb-20 md:pb-28 mt-10 relative z-10 reveal">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-solid text-5xl sm:text-6xl lg:text-7xl text-cream text-center tracking-wide drop-shadow-sm">PORTOFOLIO</h2>
                 
                 <!-- Grid Portofolio Asimetris -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12 md:mt-14">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12 md:mt-16 lg:mt-20">
                     
                     <!-- Item 1 (Lebar Kiri - Figma Link) -->
-                    <div class="col-span-1 md:col-span-7 h-[300px] sm:h-[350px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-100 border border-white/50 shadow-md">
-                        <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=800&q=80" alt="UI Design App" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="col-span-1 md:col-span-7 h-[300px] sm:h-[400px] lg:h-[450px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-100 border border-white/50 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=1000&q=80" alt="UI Design App" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         
-                        <!-- Overlay Gradient -->
                         <div class="absolute inset-0 bg-gradient-to-t from-darkblue via-darkblue/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
                         
-                        <!-- Konten Interaktif -->
-                        <div class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                        <div class="absolute inset-0 p-8 lg:p-10 flex flex-col justify-end">
                             <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs font-bold px-4 py-1.5 rounded-full mb-3 border border-white/30 shadow-sm">UI/UX Design</span>
-                                <h3 class="font-solid text-3xl sm:text-4xl text-cream mb-5 drop-shadow-md">Fintech App UI</h3>
-                                <a href="https://www.figma.com/" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 py-2.5 rounded-full font-poppins font-bold text-sm hover:bg-white hover:scale-105 transition-all shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>
+                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs lg:text-sm font-bold px-4 py-1.5 lg:py-2 rounded-full mb-3 lg:mb-4 border border-white/30 shadow-sm">UI/UX Design</span>
+                                <h3 class="font-solid text-3xl sm:text-4xl lg:text-5xl text-cream mb-5 lg:mb-6 drop-shadow-md">Fintech App UI</h3>
+                                <a href="https://www.figma.com/" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 lg:px-6 py-2.5 lg:py-3 rounded-full font-poppins font-bold text-sm lg:text-base hover:bg-white hover:scale-105 transition-all shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>
                                     Lihat di Figma
                                 </a>
                             </div>
@@ -177,17 +270,17 @@
                     </div>
 
                     <!-- Item 2 (Sempit Kanan - Eksternal Link) -->
-                    <div class="col-span-1 md:col-span-5 h-[300px] sm:h-[350px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-200 border border-white/50 shadow-md">
+                    <div class="col-span-1 md:col-span-5 h-[300px] sm:h-[400px] lg:h-[450px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-200 border border-white/50 shadow-md">
                         <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80" alt="Design System" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         
                         <div class="absolute inset-0 bg-gradient-to-t from-darkblue via-darkblue/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
                         
-                        <div class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                        <div class="absolute inset-0 p-8 lg:p-10 flex flex-col justify-end">
                             <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs font-bold px-4 py-1.5 rounded-full mb-3 border border-white/30 shadow-sm">Design System</span>
-                                <h3 class="font-solid text-3xl sm:text-4xl text-cream mb-5 drop-shadow-md">Brand Guidelines</h3>
-                                <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 py-2.5 rounded-full font-poppins font-bold text-sm hover:bg-white hover:scale-105 transition-all shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs lg:text-sm font-bold px-4 py-1.5 lg:py-2 rounded-full mb-3 lg:mb-4 border border-white/30 shadow-sm">Design System</span>
+                                <h3 class="font-solid text-3xl sm:text-4xl lg:text-5xl text-cream mb-5 lg:mb-6 drop-shadow-md">Brand Guidelines</h3>
+                                <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 lg:px-6 py-2.5 lg:py-3 rounded-full font-poppins font-bold text-sm lg:text-base hover:bg-white hover:scale-105 transition-all shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                                     Buka Project
                                 </a>
                             </div>
@@ -195,17 +288,17 @@
                     </div>
 
                     <!-- Item 3 (Sempit Kiri - Web Link) -->
-                    <div class="col-span-1 md:col-span-5 h-[300px] sm:h-[350px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-100 border border-white/50 shadow-md">
-                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80" alt="Web Design" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="col-span-1 md:col-span-5 h-[300px] sm:h-[400px] lg:h-[450px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-100 border border-white/50 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80" alt="Web Design" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         
                         <div class="absolute inset-0 bg-gradient-to-t from-darkblue via-darkblue/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
                         
-                        <div class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                        <div class="absolute inset-0 p-8 lg:p-10 flex flex-col justify-end">
                             <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs font-bold px-4 py-1.5 rounded-full mb-3 border border-white/30 shadow-sm">Web Design</span>
-                                <h3 class="font-solid text-3xl sm:text-4xl text-cream mb-5 drop-shadow-md">E-Commerce Web</h3>
-                                <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 py-2.5 rounded-full font-poppins font-bold text-sm hover:bg-white hover:scale-105 transition-all shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs lg:text-sm font-bold px-4 py-1.5 lg:py-2 rounded-full mb-3 lg:mb-4 border border-white/30 shadow-sm">Web Design</span>
+                                <h3 class="font-solid text-3xl sm:text-4xl lg:text-5xl text-cream mb-5 lg:mb-6 drop-shadow-md">E-Commerce Web</h3>
+                                <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 lg:px-6 py-2.5 lg:py-3 rounded-full font-poppins font-bold text-sm lg:text-base hover:bg-white hover:scale-105 transition-all shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                                     Live Web
                                 </a>
                             </div>
@@ -213,17 +306,17 @@
                     </div>
 
                     <!-- Item 4 (Lebar Kanan - Figma Link) -->
-                    <div class="col-span-1 md:col-span-7 h-[300px] sm:h-[350px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-200 border border-white/50 shadow-md">
-                        <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=600&q=80" alt="Wireframing" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="col-span-1 md:col-span-7 h-[300px] sm:h-[400px] lg:h-[450px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-200 border border-white/50 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=80" alt="Wireframing" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         
                         <div class="absolute inset-0 bg-gradient-to-t from-darkblue via-darkblue/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
                         
-                        <div class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                        <div class="absolute inset-0 p-8 lg:p-10 flex flex-col justify-end">
                             <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs font-bold px-4 py-1.5 rounded-full mb-3 border border-white/30 shadow-sm">Prototyping</span>
-                                <h3 class="font-solid text-3xl sm:text-4xl text-cream mb-5 drop-shadow-md">App Wireframes</h3>
-                                <a href="https://www.figma.com/" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 py-2.5 rounded-full font-poppins font-bold text-sm hover:bg-white hover:scale-105 transition-all shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>
+                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs lg:text-sm font-bold px-4 py-1.5 lg:py-2 rounded-full mb-3 lg:mb-4 border border-white/30 shadow-sm">Prototyping</span>
+                                <h3 class="font-solid text-3xl sm:text-4xl lg:text-5xl text-cream mb-5 lg:mb-6 drop-shadow-md">App Wireframes</h3>
+                                <a href="https://www.figma.com/" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 lg:px-6 py-2.5 lg:py-3 rounded-full font-poppins font-bold text-sm lg:text-base hover:bg-white hover:scale-105 transition-all shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>
                                     Lihat Prototype di Figma
                                 </a>
                             </div>
@@ -234,99 +327,26 @@
             </div>
         </section>
 
-        <!-- Bagian Pengalaman (Background Full, Konten Terpusat) -->
-        <section class="bg-cream px-6 sm:px-12 py-16 md:py-24 -mt-8 relative z-0 reveal">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="font-outline text-5xl sm:text-6xl text-darkblue text-center tracking-wide">PENGALAMAN</h2>
-                
-                <!-- Grid Layout Custom -->
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 mt-12 md:mt-16">
-                    
-                    <!-- CARD 1: ADMIN MEDIA SOSIAL -->
-                    <div class="md:col-span-3 bg-cardbg rounded-[32px] p-6 sm:p-8 relative shadow-sm hover-lift reveal delay-100 border border-[#e5e7eb]">
-                        <div class="flex justify-between items-start">
-                            <span class="bg-badgebg text-darkblue text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">2026</span>
-                            <a href="#" class="w-9 h-9 rounded-full bg-darkblue flex justify-center items-center text-cream shadow-md hover:scale-110 transition-transform">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                                </svg>
-                            </a>
-                        </div>
-                        <h3 class="font-solid text-[2rem] sm:text-[2.2rem] leading-none mt-5 text-darkblue uppercase">ADMIN MEDIA SOSIAL</h3>
-                        <p class="font-poppins font-semibold text-sm text-darkblue/80 mt-1">Antero Pictures</p>
-                        
-                        <ul class="mt-5 space-y-2.5 text-xs sm:text-sm text-darkblue/80 font-medium">
-                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[3px]">✦</span> <span class="leading-relaxed">Menyusun copywriting & publikasi konten di berbagai platform.</span></li>
-                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[3px]">✦</span> <span class="leading-relaxed">Membalas komentar, DM, dan pesan secara profesional.</span></li>
-                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[3px]">✦</span> <span class="leading-relaxed">Berkolaborasi dengan tim kreatif memastikan konten tepat waktu.</span></li>
-                        </ul>
-                    </div>
-
-                    <!-- CARD 2: KASIR -->
-                    <div class="md:col-span-2 bg-darkblue rounded-[32px] p-6 sm:p-8 text-cream relative shadow-md hover-lift reveal delay-200">
-                        <span class="bg-white/20 text-cream text-xs font-bold px-4 py-1.5 rounded-full shadow-sm backdrop-blur-sm">2025</span>
-                        <h3 class="font-solid text-[2rem] sm:text-[2.2rem] leading-none uppercase mt-5">KASIR</h3>
-                        <p class="font-poppins font-bold text-sm text-cream mt-1">(Finance Officer)</p>
-                        <p class="font-poppins font-medium text-xs text-cream/80 mt-1">Cellular World</p>
-                        
-                        <div class="mt-6 flex flex-col gap-3.5 text-xs sm:text-[0.8rem] text-cream/90 font-medium leading-relaxed">
-                            <p class="border-b border-cream/20 pb-3.5">Mengelola transaksi pelanggan.</p>
-                            <p class="border-b border-cream/20 pb-3.5">Membuat rekap transaksi keuangan.</p>
-                            <p>Memindai barang & menghitung diskon secara teliti.</p>
-                        </div>
-                    </div>
-
-                    <!-- CARD 3: RETAIL -->
-                    <div class="md:col-span-2 bg-cardbg rounded-[32px] p-6 sm:p-8 relative shadow-sm hover-lift reveal delay-100 border border-[#e5e7eb]">
-                        <span class="bg-badgebg text-darkblue text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">2024 - 2025</span>
-                        <h3 class="font-solid text-[2rem] sm:text-[2.2rem] leading-none mt-5 text-darkblue uppercase">RETAIL</h3>
-                        <p class="font-poppins font-semibold text-sm text-darkblue/80 mt-1">PT PLN Icon Plus</p>
-                        
-                        <p class="mt-4 text-[0.7rem] sm:text-xs text-darkblue/80 leading-relaxed font-medium">
-                            Mencapai target menghubungi pelanggan (Telecollection), mengolah data, turun ke lapangan menawarkan produk, dan menganalisis kompetitor.
-                        </p>
-                    </div>
-
-                    <!-- CARD 4: SEKRETARIS & BENDAHARA -->
-                    <div class="md:col-span-3 bg-darkblue rounded-[32px] p-6 sm:p-8 text-cream relative shadow-md hover-lift overflow-hidden reveal delay-200">
-                        <!-- Watermark SITITI -->
-                        <div class="absolute right-[-10px] bottom-[-25px] font-solid text-[8rem] sm:text-[11rem] text-white/5 leading-none select-none z-0 pointer-events-none">SITITI</div>
-                        
-                        <div class="relative z-10">
-                            <span class="bg-white/20 text-cream text-xs font-bold px-4 py-1.5 rounded-full shadow-sm backdrop-blur-sm">Organisasi</span>
-                            <h3 class="font-solid text-[1.8rem] sm:text-[2rem] leading-none mt-5 uppercase tracking-wide">SEKRETARIS & BENDAHARA</h3>
-                            <p class="font-poppins font-bold text-sm text-cream/90 mt-1 uppercase">SITITI</p>
-                            
-                            <p class="mt-4 text-xs sm:text-sm text-cream/80 leading-relaxed max-w-[95%] font-medium">
-                                Berhubungan langsung dengan pihak sponsor, menangani proposal, surat sponsor, dan laporan kegiatan untuk dua event utama. Mengelola arus keuangan acara secara efisien.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Bagian Footer (Let's Work! & Kontak) - Background Full -->
-        <footer class="bg-darkblue rounded-t-[40px] md:rounded-t-[60px] px-6 sm:px-12 pt-20 md:pt-24 pb-10 mt-8 relative z-10 reveal flex flex-col items-center">
+        <!-- Bagian Footer (Let's Work! & Kontak) -->
+        <footer id="contact" class="bg-darkblue rounded-t-[40px] md:rounded-t-[60px] lg:rounded-t-[80px] px-6 sm:px-12 pt-20 md:pt-28 pb-12 mt-8 relative z-10 reveal flex flex-col items-center">
             
             <div class="max-w-4xl w-full mx-auto flex flex-col items-center">
                 <!-- Let's Work Heading -->
-                <h2 class="flex justify-center items-center gap-x-3 text-5xl sm:text-6xl tracking-wider text-cream hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <h2 class="flex justify-center items-center gap-x-3 text-5xl sm:text-6xl lg:text-7xl tracking-wider text-cream hover:scale-105 transition-transform duration-300 cursor-pointer">
                     <span class="font-outline">LET'S</span>
                     <span class="font-solid">WORK!</span>
                 </h2>
 
                 <!-- Glassmorphism Contact Card -->
-                <div class="mt-10 max-w-3xl w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-[28px] p-6 sm:p-8 shadow-lg text-cream transition-transform duration-300 hover:scale-[1.01]">
-                    <p class="text-center font-poppins font-medium text-sm mb-6">
+                <div class="mt-12 lg:mt-16 max-w-3xl w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-[28px] lg:rounded-[32px] p-6 sm:p-8 lg:p-10 shadow-lg text-cream transition-transform duration-300 hover:scale-[1.01]">
+                    <p class="text-center font-poppins font-medium text-sm lg:text-base mb-6 lg:mb-8">
                         Hubungi saya untuk kesempatan kolaborasi dan pekerjaan.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 font-poppins font-medium text-sm">
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 lg:gap-10 font-poppins font-medium text-sm lg:text-base">
                         <!-- Email -->
-                        <a href="mailto:icamaelani2@gmail.com" class="flex items-center gap-2 hover:text-white transition-colors group">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <a href="mailto:icamaelani2@gmail.com" class="flex items-center gap-2 lg:gap-3 hover:text-white transition-colors group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 lg:h-5 lg:w-5 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                             icamaelani2@gmail.com
@@ -336,8 +356,8 @@
                         <span class="hidden sm:block text-white/30">|</span>
 
                         <!-- Phone / WA -->
-                        <a href="https://wa.me/6287880620082" target="_blank" class="flex items-center gap-2 hover:text-white transition-colors group">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <a href="https://wa.me/6287880620082" target="_blank" class="flex items-center gap-2 lg:gap-3 hover:text-white transition-colors group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 lg:h-5 lg:w-5 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                             0878 8062 0082
@@ -345,8 +365,8 @@
                     </div>
 
                     <!-- Location -->
-                    <div class="flex justify-center items-center gap-2 mt-6 text-[0.7rem] sm:text-xs text-cream/80 text-center font-poppins">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <div class="flex justify-center items-center gap-2 lg:gap-3 mt-6 lg:mt-8 text-[0.75rem] sm:text-xs lg:text-sm text-cream/80 text-center font-poppins">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 lg:h-5 lg:w-5 shrink-0 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
@@ -355,7 +375,7 @@
                 </div>
 
                 <!-- Copyright -->
-                <p class="mt-16 text-center text-cream/50 text-xs font-poppins tracking-wide">
+                <p class="mt-16 lg:mt-20 text-center text-cream/40 text-xs font-poppins tracking-wide">
                     © 2026 Ica Maelani Plamboyan. All rights reserved.
                 </p>
             </div>
