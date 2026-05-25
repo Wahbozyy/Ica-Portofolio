@@ -1,340 +1,390 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ica Maelani | Portfolio</title>
-    
-    <!-- Google Fonts: Luckiest Guy & Quicksand -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS (via CDN for single file execution) -->
+    <title>Ica Maelani Plamboyan - Portofolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'light-cream': '#FBF5DD',
-                        'dark-cream': '#E7E1B1',
-                        'vibrant-green': '#306D29',
-                        'dark-green': '#0D530E',
-                    },
-                    fontFamily: {
-                        'heading': ['"Luckiest Guy"', 'cursive'],
-                        'body': ['"Quicksand"', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'hover-green': '0 20px 40px -15px rgba(48, 109, 41, 0.3)',
-                        'glass': '0 8px 32px 0 rgba(13, 83, 14, 0.1)',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Custom CSS for Animations & Organic Textures -->
     <style>
-        /* Base styles & Grain Texture */
-        body {
-            background-color: #FBF5DD;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        .bg-grain {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 50;
-            opacity: 0.25;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        /* Mengimpor font dari Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&family=Londrina+Solid:wght@400;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /* Mendeklarasikan class khusus untuk font */
+        .font-solid { font-family: 'Londrina Solid', cursive; }
+        .font-outline { font-family: 'Londrina Outline', cursive; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+
+        /* Mencegah highlight biru saat di-tap di mobile */
+        * {
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Typography Styles */
-        .text-outline {
-            color: transparent;
-            -webkit-text-stroke: 2px #FBF5DD;
+        /* Animasi halus untuk hover (Shadow disesuaikan dengan warna biru) */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .text-outline-green {
-            color: transparent;
-            -webkit-text-stroke: 2px #0D530E;
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px -5px rgba(72, 117, 147, 0.25);
         }
 
-        /* Marquee Animation */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-        }
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 20s linear infinite;
-        }
-        @keyframes marquee {
+        /* Animasi Marquee (Teks Berjalan) */
+        @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
+        .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 25s linear infinite;
+        }
+        
+        /* Pause saat di-hover */
+        .marquee-container:hover .animate-scroll {
+            animation-play-state: paused;
+        }
 
-        /* Scroll Reveal Animation (Framer Style) */
+        /* Animasi Scroll Halus */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Custom Hover Transitions */
-        .bento-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .bento-card:hover {
-            transform: translateY(-8px) scale(1.02);
-        }
-
-        /* Abstract Blobs */
-        .blob {
-            position: absolute;
-            filter: blur(80px);
-            z-index: -1;
-            border-radius: 50%;
-            opacity: 0.4;
-        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F4EDDD', // Warna background utama
+                        cardbg: '#FFFFFF', // Warna background card terang
+                        darkblue: '#487593', // Warna biru gelap utama
+                        lightblue: '#B1C8D6', // Warna biru muda untuk aksen & background portofolio
+                        badgebg: '#D6E4ED' // Warna badge tahun
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="font-body text-dark-green antialiased selection:bg-vibrant-green selection:text-light-cream">
+<body class="bg-cream font-poppins text-darkblue min-h-screen">
 
-    <!-- Global Grain Texture overlay -->
-    <div class="bg-grain"></div>
-
-    <!-- Sticky Navigation -->
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-40 w-[90%] md:w-auto px-6 py-3 bg-light-cream/70 backdrop-blur-md rounded-full shadow-glass border border-dark-cream/50 flex justify-between items-center gap-8 transition-all">
-        <a href="#home" class="font-heading text-xl tracking-wider text-dark-green hover:text-vibrant-green transition">ICA.</a>
-        <div class="hidden md:flex gap-6 font-semibold text-sm">
-            <a href="#about" class="hover:text-vibrant-green transition">About</a>
-            <a href="#experience" class="hover:text-vibrant-green transition">Experience</a>
-            <a href="#skills" class="hover:text-vibrant-green transition">Skills</a>
-        </div>
-        <a href="#contact" class="bg-dark-green text-light-cream px-5 py-2 rounded-full text-sm font-bold hover:bg-vibrant-green transition hover:shadow-lg">Let's Talk</a>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <header id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
-        <!-- Background Image Placeholder (GANTI URL GAMBAR DI SINI) -->
-        <div class="absolute inset-0 z-0">
-            <!-- Gunakan foto diri Anda dengan mengubah link src di bawah ini -->
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" alt="Background" class="w-full h-full object-cover object-center" />
-            <!-- Overlay untuk memastikan teks terbaca -->
-            <div class="absolute inset-0 bg-dark-green/50 mix-blend-multiply"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-green via-transparent to-transparent opacity-80"></div>
-        </div>
-
-        <div class="relative z-10 text-center reveal mt-12">
-            <h1 class="font-heading text-6xl md:text-8xl lg:text-9xl tracking-wide flex flex-col items-center leading-[0.9]">
-                <span class="text-light-cream drop-shadow-xl">ICA MAELANI</span>
-                <span class="text-outline">PLAMBOYAN</span>
+    <!-- Wrapper Utama -->
+    <main class="w-full relative overflow-hidden">
+        
+        <!-- Bagian Header (Nama) -->
+        <header class="pt-16 md:pt-24 px-6 text-center reveal active max-w-4xl mx-auto">
+            <h1 class="flex flex-col items-center justify-center text-[4.5rem] sm:text-[6.5rem] md:text-[8rem] leading-[0.85] tracking-wide text-darkblue">
+                <div class="flex items-center gap-x-3 sm:gap-x-4">
+                    <span class="font-solid">ICA</span>
+                    <span class="font-outline">MAE</span>
+                    <span class="font-solid">LANI</span>
+                </div>
+                <div class="flex items-center gap-x-3 sm:gap-x-4 mt-2 sm:mt-4">
+                    <span class="font-solid">PLA</span>
+                    <span class="font-outline">MBO</span>
+                    <span class="font-solid">YAN</span>
+                </div>
             </h1>
-            <p class="mt-8 text-lg md:text-xl font-medium text-light-cream max-w-2xl mx-auto px-4 drop-shadow-md">
-                Creative Admin & Social Media Specialist
-            </p>
-            <div class="mt-10 flex justify-center gap-4">
-                <a href="#experience" class="bg-vibrant-green text-light-cream px-8 py-4 rounded-full font-bold hover:-translate-y-1 transition-transform shadow-lg">Lihat Karya</a>
+        </header>
+
+        <!-- Garis Pemisah Biru Tipis (Berisi Scrolling Tools) - Full Width -->
+        <div class="w-full bg-lightblue mt-16 md:mt-20 reveal overflow-hidden py-3 sm:py-3.5 border-y-2 border-darkblue/10 marquee-container cursor-default">
+            <div class="animate-scroll flex items-center gap-6 sm:gap-8 px-4 text-darkblue font-poppins font-bold text-xs sm:text-sm tracking-wider uppercase">
+                <!-- Set 1 -->
+                <span>Figma</span> <span class="text-[10px]">✦</span>
+                <span>Canva</span> <span class="text-[10px]">✦</span>
+                <span>Lightroom</span> <span class="text-[10px]">✦</span>
+                <span>Microsoft Office</span> <span class="text-[10px]">✦</span>
+                <span>Google Sheets</span> <span class="text-[10px]">✦</span>
+                <span>Meta Ads</span> <span class="text-[10px]">✦</span>
+                <span>TikTok Business</span> <span class="text-[10px]">✦</span>
+                <span>HTML & CSS</span> <span class="text-[10px]">✦</span>
+                <!-- Set 2 (Diduplikat agar looping tidak terputus) -->
+                <span>Figma</span> <span class="text-[10px]">✦</span>
+                <span>Canva</span> <span class="text-[10px]">✦</span>
+                <span>Lightroom</span> <span class="text-[10px]">✦</span>
+                <span>Microsoft Office</span> <span class="text-[10px]">✦</span>
+                <span>Google Sheets</span> <span class="text-[10px]">✦</span>
+                <span>Meta Ads</span> <span class="text-[10px]">✦</span>
+                <span>TikTok Business</span> <span class="text-[10px]">✦</span>
+                <span>HTML & CSS</span> <span class="text-[10px]">✦</span>
             </div>
         </div>
-    </header>
 
-    <!-- MARQUEE DIVIDER -->
-    <div class="bg-vibrant-green text-light-cream py-4 marquee-container border-y-2 border-dark-green/20">
-        <div class="marquee-content font-heading text-2xl tracking-widest uppercase">
-            CREATIVE • ADAPTIVE • COLLABORATIVE • PROBLEM SOLVER • CREATIVE • ADAPTIVE • COLLABORATIVE • PROBLEM SOLVER • CREATIVE • ADAPTIVE • COLLABORATIVE • PROBLEM SOLVER •
-        </div>
-    </div>
+        <!-- Bagian Tentang Saya (Who Am I) -->
+        <section class="px-6 sm:px-12 py-12 md:py-20 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 reveal">
+            <div class="flex-1 text-center md:text-left">
+                <!-- Judul Who Am I -->
+                <h2 class="text-[3.5rem] sm:text-[4.5rem] leading-none flex justify-center md:justify-start gap-x-2">
+                    <span class="font-solid">WHO</span>
+                    <span class="font-outline">AM</span>
+                    <span class="font-outline lowercase">i</span>
+                    <span class="font-solid">?</span>
+                </h2>
+                
+                <!-- Subtitle -->
+                <p class="text-[0.65rem] sm:text-xs font-bold tracking-tight text-darkblue/80 mt-3">
+                    Junior UI Designer & Basic Prototyping | Selective Personal Muse
+                </p>
 
-    <!-- ABOUT & EDUCATION SECTION -->
-    <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative">
-        <div class="blob bg-dark-cream w-96 h-96 top-0 left-0"></div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            <!-- Text Content -->
-            <div class="md:col-span-8 reveal">
-                <h2 class="font-heading text-4xl md:text-5xl text-dark-green mb-6">Tentang <span class="text-vibrant-green">Saya</span></h2>
-                <p class="text-xl md:text-2xl leading-relaxed font-medium text-dark-green/80">
-                    Lulusan baru dengan kompetensi dasar <span class="text-vibrant-green font-bold">administrasi</span> dan <span class="text-vibrant-green font-bold">pelayanan pelanggan</span>. Saya berpengalaman dalam manajemen media sosial, telecollection, hingga transaksi keuangan retail. Terampil mengoperasikan perangkat lunak produktivitas dan alat kreatif digital. Saya adalah pribadi yang kolaboratif serta adaptif terhadap tantangan baru.
+                <!-- Deskripsi -->
+                <p class="text-xs sm:text-sm mt-5 leading-relaxed font-medium text-justify md:text-left">
+                    <span class="font-bold text-darkblue text-sm sm:text-base">ICA MAELANI,</span> Seorang <span class="italic font-bold">Junior UI Designer</span> dengan basic prototyping yang menciptakan antarmuka modern dan intuitif (mudah dipahami) untuk berbagai kebutuhan pengguna. 
+                    <br><br>
+                    Juga seorang <span class="italic font-bold">Selective Personal Muse</span> Memiliki pengalaman Berkolaborasi dengan kreator atau fotografer tertentu melalui relasi profesional dan terpercaya.
+                </p>
+            </div>
+
+            <!-- Gambar Profil -->
+            <div class="w-48 h-64 sm:w-64 sm:h-80 md:w-72 md:h-96 shrink-0 relative rounded-2xl overflow-hidden shadow-lg border-4 border-cardbg mx-auto md:mx-0">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Ica Maelani Profile" class="w-full h-full object-cover object-top">
+            </div>
+        </section>
+
+        <!-- Bagian Portofolio (Background Full, Konten Terpusat) -->
+        <section class="bg-lightblue rounded-t-[40px] md:rounded-t-[60px] px-6 sm:px-12 pt-16 md:pt-20 pb-20 md:pb-24 mt-4 relative z-10 reveal">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-solid text-5xl sm:text-6xl text-cream text-center tracking-wide drop-shadow-sm">PORTOFOLIO</h2>
+                
+                <!-- Grid Portofolio Asimetris -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12 md:mt-14">
+                    
+                    <!-- Item 1 (Lebar Kiri - Figma Link) -->
+                    <div class="col-span-1 md:col-span-7 h-[300px] sm:h-[350px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-100 border border-white/50 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=800&q=80" alt="UI Design App" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        
+                        <!-- Overlay Gradient -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkblue via-darkblue/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
+                        
+                        <!-- Konten Interaktif -->
+                        <div class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs font-bold px-4 py-1.5 rounded-full mb-3 border border-white/30 shadow-sm">UI/UX Design</span>
+                                <h3 class="font-solid text-3xl sm:text-4xl text-cream mb-5 drop-shadow-md">Fintech App UI</h3>
+                                <a href="https://www.figma.com/" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 py-2.5 rounded-full font-poppins font-bold text-sm hover:bg-white hover:scale-105 transition-all shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>
+                                    Lihat di Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 (Sempit Kanan - Eksternal Link) -->
+                    <div class="col-span-1 md:col-span-5 h-[300px] sm:h-[350px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-200 border border-white/50 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80" alt="Design System" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkblue via-darkblue/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
+                        
+                        <div class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs font-bold px-4 py-1.5 rounded-full mb-3 border border-white/30 shadow-sm">Design System</span>
+                                <h3 class="font-solid text-3xl sm:text-4xl text-cream mb-5 drop-shadow-md">Brand Guidelines</h3>
+                                <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 py-2.5 rounded-full font-poppins font-bold text-sm hover:bg-white hover:scale-105 transition-all shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Buka Project
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 (Sempit Kiri - Web Link) -->
+                    <div class="col-span-1 md:col-span-5 h-[300px] sm:h-[350px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-100 border border-white/50 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80" alt="Web Design" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkblue via-darkblue/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
+                        
+                        <div class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs font-bold px-4 py-1.5 rounded-full mb-3 border border-white/30 shadow-sm">Web Design</span>
+                                <h3 class="font-solid text-3xl sm:text-4xl text-cream mb-5 drop-shadow-md">E-Commerce Web</h3>
+                                <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 py-2.5 rounded-full font-poppins font-bold text-sm hover:bg-white hover:scale-105 transition-all shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                    Live Web
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 (Lebar Kanan - Figma Link) -->
+                    <div class="col-span-1 md:col-span-7 h-[300px] sm:h-[350px] rounded-[32px] overflow-hidden bg-cardbg relative group reveal delay-200 border border-white/50 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=600&q=80" alt="Wireframing" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkblue via-darkblue/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
+                        
+                        <div class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                                <span class="inline-block bg-white/20 backdrop-blur-md text-cream text-xs font-bold px-4 py-1.5 rounded-full mb-3 border border-white/30 shadow-sm">Prototyping</span>
+                                <h3 class="font-solid text-3xl sm:text-4xl text-cream mb-5 drop-shadow-md">App Wireframes</h3>
+                                <a href="https://www.figma.com/" target="_blank" class="inline-flex items-center gap-2 bg-cream text-darkblue px-5 py-2.5 rounded-full font-poppins font-bold text-sm hover:bg-white hover:scale-105 transition-all shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>
+                                    Lihat Prototype di Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Pengalaman (Background Full, Konten Terpusat) -->
+        <section class="bg-cream px-6 sm:px-12 py-16 md:py-24 -mt-8 relative z-0 reveal">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-outline text-5xl sm:text-6xl text-darkblue text-center tracking-wide">PENGALAMAN</h2>
+                
+                <!-- Grid Layout Custom -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 mt-12 md:mt-16">
+                    
+                    <!-- CARD 1: ADMIN MEDIA SOSIAL -->
+                    <div class="md:col-span-3 bg-cardbg rounded-[32px] p-6 sm:p-8 relative shadow-sm hover-lift reveal delay-100 border border-[#e5e7eb]">
+                        <div class="flex justify-between items-start">
+                            <span class="bg-badgebg text-darkblue text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">2026</span>
+                            <a href="#" class="w-9 h-9 rounded-full bg-darkblue flex justify-center items-center text-cream shadow-md hover:scale-110 transition-transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                </svg>
+                            </a>
+                        </div>
+                        <h3 class="font-solid text-[2rem] sm:text-[2.2rem] leading-none mt-5 text-darkblue uppercase">ADMIN MEDIA SOSIAL</h3>
+                        <p class="font-poppins font-semibold text-sm text-darkblue/80 mt-1">Antero Pictures</p>
+                        
+                        <ul class="mt-5 space-y-2.5 text-xs sm:text-sm text-darkblue/80 font-medium">
+                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[3px]">✦</span> <span class="leading-relaxed">Menyusun copywriting & publikasi konten di berbagai platform.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[3px]">✦</span> <span class="leading-relaxed">Membalas komentar, DM, dan pesan secara profesional.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-[10px] mt-[3px]">✦</span> <span class="leading-relaxed">Berkolaborasi dengan tim kreatif memastikan konten tepat waktu.</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- CARD 2: KASIR -->
+                    <div class="md:col-span-2 bg-darkblue rounded-[32px] p-6 sm:p-8 text-cream relative shadow-md hover-lift reveal delay-200">
+                        <span class="bg-white/20 text-cream text-xs font-bold px-4 py-1.5 rounded-full shadow-sm backdrop-blur-sm">2025</span>
+                        <h3 class="font-solid text-[2rem] sm:text-[2.2rem] leading-none uppercase mt-5">KASIR</h3>
+                        <p class="font-poppins font-bold text-sm text-cream mt-1">(Finance Officer)</p>
+                        <p class="font-poppins font-medium text-xs text-cream/80 mt-1">Cellular World</p>
+                        
+                        <div class="mt-6 flex flex-col gap-3.5 text-xs sm:text-[0.8rem] text-cream/90 font-medium leading-relaxed">
+                            <p class="border-b border-cream/20 pb-3.5">Mengelola transaksi pelanggan.</p>
+                            <p class="border-b border-cream/20 pb-3.5">Membuat rekap transaksi keuangan.</p>
+                            <p>Memindai barang & menghitung diskon secara teliti.</p>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: RETAIL -->
+                    <div class="md:col-span-2 bg-cardbg rounded-[32px] p-6 sm:p-8 relative shadow-sm hover-lift reveal delay-100 border border-[#e5e7eb]">
+                        <span class="bg-badgebg text-darkblue text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">2024 - 2025</span>
+                        <h3 class="font-solid text-[2rem] sm:text-[2.2rem] leading-none mt-5 text-darkblue uppercase">RETAIL</h3>
+                        <p class="font-poppins font-semibold text-sm text-darkblue/80 mt-1">PT PLN Icon Plus</p>
+                        
+                        <p class="mt-4 text-[0.7rem] sm:text-xs text-darkblue/80 leading-relaxed font-medium">
+                            Mencapai target menghubungi pelanggan (Telecollection), mengolah data, turun ke lapangan menawarkan produk, dan menganalisis kompetitor.
+                        </p>
+                    </div>
+
+                    <!-- CARD 4: SEKRETARIS & BENDAHARA -->
+                    <div class="md:col-span-3 bg-darkblue rounded-[32px] p-6 sm:p-8 text-cream relative shadow-md hover-lift overflow-hidden reveal delay-200">
+                        <!-- Watermark SITITI -->
+                        <div class="absolute right-[-10px] bottom-[-25px] font-solid text-[8rem] sm:text-[11rem] text-white/5 leading-none select-none z-0 pointer-events-none">SITITI</div>
+                        
+                        <div class="relative z-10">
+                            <span class="bg-white/20 text-cream text-xs font-bold px-4 py-1.5 rounded-full shadow-sm backdrop-blur-sm">Organisasi</span>
+                            <h3 class="font-solid text-[1.8rem] sm:text-[2rem] leading-none mt-5 uppercase tracking-wide">SEKRETARIS & BENDAHARA</h3>
+                            <p class="font-poppins font-bold text-sm text-cream/90 mt-1 uppercase">SITITI</p>
+                            
+                            <p class="mt-4 text-xs sm:text-sm text-cream/80 leading-relaxed max-w-[95%] font-medium">
+                                Berhubungan langsung dengan pihak sponsor, menangani proposal, surat sponsor, dan laporan kegiatan untuk dua event utama. Mengelola arus keuangan acara secara efisien.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Footer (Let's Work! & Kontak) - Background Full -->
+        <footer class="bg-darkblue rounded-t-[40px] md:rounded-t-[60px] px-6 sm:px-12 pt-20 md:pt-24 pb-10 mt-8 relative z-10 reveal flex flex-col items-center">
+            
+            <div class="max-w-4xl w-full mx-auto flex flex-col items-center">
+                <!-- Let's Work Heading -->
+                <h2 class="flex justify-center items-center gap-x-3 text-5xl sm:text-6xl tracking-wider text-cream hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <span class="font-outline">LET'S</span>
+                    <span class="font-solid">WORK!</span>
+                </h2>
+
+                <!-- Glassmorphism Contact Card -->
+                <div class="mt-10 max-w-3xl w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-[28px] p-6 sm:p-8 shadow-lg text-cream transition-transform duration-300 hover:scale-[1.01]">
+                    <p class="text-center font-poppins font-medium text-sm mb-6">
+                        Hubungi saya untuk kesempatan kolaborasi dan pekerjaan.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 font-poppins font-medium text-sm">
+                        <!-- Email -->
+                        <a href="mailto:icamaelani2@gmail.com" class="flex items-center gap-2 hover:text-white transition-colors group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            icamaelani2@gmail.com
+                        </a>
+                        
+                        <!-- Divider (visible on sm+) -->
+                        <span class="hidden sm:block text-white/30">|</span>
+
+                        <!-- Phone / WA -->
+                        <a href="https://wa.me/6287880620082" target="_blank" class="flex items-center gap-2 hover:text-white transition-colors group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            0878 8062 0082
+                        </a>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="flex justify-center items-center gap-2 mt-6 text-[0.7rem] sm:text-xs text-cream/80 text-center font-poppins">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Jl. Raya Munggu, Br. Gunung Pande, Desa Tumbak Bayuh</span>
+                    </div>
+                </div>
+
+                <!-- Copyright -->
+                <p class="mt-16 text-center text-cream/50 text-xs font-poppins tracking-wide">
+                    © 2026 Ica Maelani Plamboyan. All rights reserved.
                 </p>
             </div>
             
-            <!-- Education Card -->
-            <div class="md:col-span-4 reveal">
-                <div class="bg-dark-cream p-8 rounded-[2rem] shadow-lg border border-vibrant-green/10 transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                    <h3 class="font-heading text-2xl text-dark-green mb-2">Pendidikan</h3>
-                    <div class="text-vibrant-green font-bold text-lg mb-1">2022 - 2025</div>
-                    <div class="font-bold text-xl text-dark-green leading-tight">SMK TI Bali Global Badung</div>
-                    <p class="mt-2 text-dark-green/70 font-medium">Rekayasa Perangkat Lunak</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </footer>
 
-    <!-- EXPERIENCE (BENTO BOX LAYOUT) -->
-    <section id="experience" class="py-24 bg-dark-cream relative rounded-t-[3rem] px-6 md:px-12">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="font-heading text-5xl md:text-6xl text-center mb-16 text-outline-green">PENGALAMAN</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(180px,auto)]">
-                
-                <!-- Card 1: Social Media (Large) -->
-                <div class="bento-card bg-light-cream rounded-[2.5rem] p-8 md:col-span-2 shadow-sm border border-dark-green/5 reveal hover:shadow-hover-green">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="bg-dark-green/10 text-dark-green px-4 py-1 rounded-full text-sm font-bold inline-block">2026</div>
-                        <div class="bg-vibrant-green text-light-cream w-12 h-12 rounded-full flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-                        </div>
-                    </div>
-                    <h3 class="font-heading text-3xl text-dark-green mb-1">Admin Media Sosial</h3>
-                    <h4 class="text-vibrant-green font-bold text-lg mb-4">Antero Pictures</h4>
-                    <ul class="list-none space-y-2 text-dark-green/80 font-medium">
-                        <li class="flex items-start gap-2">
-                            <span class="text-vibrant-green mt-1">✦</span>
-                            <span>Menyusun copywriting & publikasi konten di berbagai platform.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-vibrant-green mt-1">✦</span>
-                            <span>Membalas komentar, DM, dan pesan secara profesional.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-vibrant-green mt-1">✦</span>
-                            <span>Berkolaborasi dengan tim kreatif memastikan konten tepat waktu.</span>
-                        </li>
-                    </ul>
-                </div>
+    </main>
 
-                <!-- Card 2: Finance Officer (Tall) -->
-                <div class="bento-card bg-vibrant-green text-light-cream rounded-[2.5rem] p-8 md:col-span-1 shadow-sm reveal hover:shadow-hover-green flex flex-col justify-between">
-                    <div>
-                        <div class="bg-light-cream/20 text-light-cream px-4 py-1 rounded-full text-sm font-bold inline-block mb-4">2025</div>
-                        <h3 class="font-heading text-3xl mb-1 text-light-cream">Kasir <br><span class="text-xl font-body font-bold">(Finance Officer)</span></h3>
-                        <h4 class="text-light-cream/80 font-bold text-lg mb-4">Cellular World</h4>
-                    </div>
-                    <ul class="list-none space-y-3 font-medium text-light-cream/90 text-sm mt-4">
-                        <li class="border-b border-light-cream/20 pb-2">Mengelola transaksi pelanggan.</li>
-                        <li class="border-b border-light-cream/20 pb-2">Membuat rekap transaksi keuangan.</li>
-                        <li>Memindai barang & menghitung diskon secara teliti.</li>
-                    </ul>
-                </div>
-
-                <!-- Card 3: Telecollection -->
-                <div class="bento-card bg-light-cream rounded-[2.5rem] p-8 md:col-span-1 shadow-sm border border-dark-green/5 reveal hover:shadow-hover-green">
-                    <div class="bg-dark-green/10 text-dark-green px-4 py-1 rounded-full text-sm font-bold inline-block mb-4">2024 - 2025</div>
-                    <h3 class="font-heading text-2xl text-dark-green mb-1">Retail</h3>
-                    <h4 class="text-vibrant-green font-bold mb-4">PT PLN Icon Plus</h4>
-                    <p class="text-dark-green/80 font-medium text-sm">
-                        Mencapai target menghubungi pelanggan (Telecollection), mengolah data, turun ke lapangan menawarkan produk, dan menganalisis kompetitor.
-                    </p>
-                </div>
-
-                <!-- Card 4: Organization (Wide) -->
-                <div class="bento-card bg-dark-green text-light-cream rounded-[2.5rem] p-8 md:col-span-2 shadow-sm reveal hover:shadow-lg relative overflow-hidden">
-                    <div class="absolute right-[-10%] top-[-10%] text-[10rem] font-heading opacity-5 text-light-cream pointer-events-none">SITITI</div>
-                    <div class="relative z-10">
-                        <div class="bg-vibrant-green px-4 py-1 rounded-full text-sm font-bold inline-block mb-4">Organisasi</div>
-                        <h3 class="font-heading text-3xl mb-1">Sekretaris & Bendahara</h3>
-                        <h4 class="text-light-cream/80 font-bold text-lg mb-4">SITITI</h4>
-                        <p class="font-medium text-light-cream/90">
-                            Berhubungan langsung dengan pihak sponsor, menangani proposal, surat sponsor, dan laporan kegiatan untuk dua event utama. Mengelola arus keuangan acara secara efisien.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SKILLS SECTION -->
-    <section id="skills" class="py-24 px-6 md:px-12 max-w-7xl mx-auto text-center relative">
-        <div class="blob bg-dark-cream w-[30rem] h-[30rem] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-        <h2 class="font-heading text-5xl md:text-6xl text-dark-green mb-12 relative z-10 reveal">KETERAMPILAN</h2>
-        
-        <div class="flex flex-wrap justify-center gap-4 relative z-10 max-w-4xl mx-auto reveal">
-            <!-- Hard Skills -->
-            <span class="bg-vibrant-green text-light-cream px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition-transform cursor-default">Microsoft Office</span>
-            <span class="bg-vibrant-green text-light-cream px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition-transform cursor-default">Google Sheets</span>
-            <span class="bg-vibrant-green text-light-cream px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition-transform cursor-default">Meta Ads</span>
-            <span class="bg-vibrant-green text-light-cream px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition-transform cursor-default">TikTok Business</span>
-            <span class="bg-dark-green text-light-cream px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition-transform cursor-default">Figma</span>
-            <span class="bg-dark-green text-light-cream px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition-transform cursor-default">Lightroom</span>
-            <span class="bg-dark-green text-light-cream px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition-transform cursor-default">Canva</span>
-            <span class="bg-dark-green text-light-cream px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition-transform cursor-default">Dasar HTML & CSS</span>
-            
-            <!-- Soft Skills (Lighter shade or outline) -->
-            <span class="border-2 border-dark-green text-dark-green px-6 py-3 rounded-full text-lg font-bold hover:bg-dark-green hover:text-light-cream transition-colors cursor-default mt-4">Inisiatif & Komunikatif</span>
-            <span class="border-2 border-dark-green text-dark-green px-6 py-3 rounded-full text-lg font-bold hover:bg-dark-green hover:text-light-cream transition-colors cursor-default mt-4">Kerjasama Tim</span>
-            <span class="border-2 border-dark-green text-dark-green px-6 py-3 rounded-full text-lg font-bold hover:bg-dark-green hover:text-light-cream transition-colors cursor-default mt-4">Cepat Beradaptasi</span>
-            <span class="border-2 border-dark-green text-dark-green px-6 py-3 rounded-full text-lg font-bold hover:bg-dark-green hover:text-light-cream transition-colors cursor-default mt-4">Problem Solving</span>
-        </div>
-    </section>
-
-    <!-- FOOTER / CONTACT SECTION -->
-    <footer id="contact" class="bg-dark-green pt-24 pb-12 px-6 md:px-12 text-center rounded-t-[3rem] relative overflow-hidden">
-        <div class="relative z-10 reveal">
-            <h2 class="font-heading text-6xl md:text-[8rem] leading-none mb-8">
-                <span class="text-outline">LET'S</span> <span class="text-light-cream">WORK!</span>
-            </h2>
-            
-            <div class="max-w-2xl mx-auto bg-light-cream/10 backdrop-blur-sm border border-light-cream/20 rounded-[2rem] p-8 mt-12">
-                <p class="text-light-cream font-medium text-lg mb-6 text-center">Hubungi saya untuk kesempatan kolaborasi dan pekerjaan.</p>
-                
-                <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-light-cream/90 font-semibold">
-                    <a href="mailto:icamaelani2@gmail.com" class="flex items-center gap-2 hover:text-vibrant-green transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        icamaelani2@gmail.com
-                    </a>
-                    <span class="hidden md:block text-light-cream/30">|</span>
-                    <a href="tel:+6287880620082" class="flex items-center gap-2 hover:text-vibrant-green transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                        0878 8062 0082
-                    </a>
-                </div>
-                <div class="mt-6 text-light-cream/70 text-sm flex items-center justify-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    Jl. Raya Munggu, Br. Gunung Pande, Desa Tumbak Bayuh
-                </div>
-            </div>
-
-            <div class="mt-16 text-light-cream/50 text-sm font-medium">
-                © 2026 Ica Maelani Plamboyan. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Vanilla JS for Scroll Animation (Reveal Effect) -->
+    <!-- Script Intersection Observer untuk memicu animasi saat scroll -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const reveals = document.querySelectorAll('.reveal');
+        document.addEventListener("DOMContentLoaded", function() {
+            const reveals = document.querySelectorAll(".reveal");
 
-            const revealOnScroll = () => {
-                const windowHeight = window.innerHeight;
-                const elementVisible = 100;
-
-                reveals.forEach((reveal) => {
-                    const elementTop = reveal.getBoundingClientRect().top;
-                    if (elementTop < windowHeight - elementVisible) {
-                        reveal.classList.add('active');
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target); 
                     }
                 });
-            };
+            }, {
+                root: null,
+                threshold: 0.15, 
+                rootMargin: "0px"
+            });
 
-            // Initial check
-            revealOnScroll();
-            
-            // Listen for scroll
-            window.addEventListener('scroll', revealOnScroll);
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
         });
     </script>
 </body>
